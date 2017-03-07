@@ -46,7 +46,7 @@ function master(employees) {
                        '</tr>');
     } // end of array-loop
     $('table').append('</table>'); // close table
-    $('table').attr('border', '1'); // add table border
+    $('table').addClass('table'); // add table border
   } // end of if(totalEmployees)
 } // end of master() function
 
