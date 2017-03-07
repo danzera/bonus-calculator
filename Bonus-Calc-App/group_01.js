@@ -101,7 +101,7 @@ function bonusCalc (employeeNum, salary, rating){
   }
   // reduction in bonus for employees with salary > 65000
   if (parseInt(salary) > 65000) {
-    bonusPercent = 0.01; // reduce bonus by 1%
+    bonusPercent -= 0.01; // reduce bonus by 1%
   }
   // confirm bonusPercent is within minBonus-maxBonus range
   // if not, set bonusPercent = min/max
