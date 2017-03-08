@@ -75,23 +75,21 @@ function employeeOutput(employee) {
 
 // function to calcualte an employee bonus
 // inputs: employee number (string), annual salary (string), rating (number)
-// output: bonus percentage (decimal number)
-function bonusCalc (employeeNum, salary, rating){
-  // start with bonusPercent = 0
-  var ratingBonus = ratingBonus(rating);
-  var maxBonus = 0.13; // maximum bonus = 13%
-  var minBonus = 0; // minimum bonus = 0%
-  var bonusPercent = 0;
-  // additional bonus for employees with 15+ years of service
-  // 4 digit employeeNum denotes these employees
-  if (employeeNum.length === 4) {
-    bonusPercent += 0.05; // additional bonus of 5%
-  }
-  // reduction in bonus for employees with salary > 65000
-  if (parseInt(salary) > 65000) {
-    bonusPercent -= 0.01; // reduce bonus by 1%
-  }
-  // confirm bonusPercent is within minBonus-maxBonus range
+// output: total bonus percentage (decimal number)
+function bonusCalc (employeeNumber, salary, rating){
+  // determine tenure bonus
+  var tenure = tenureBonus(employeeNumber);
+  // determine rating bonus
+  var baseBonus = ratingBonus(rating);
+  // determine salary bonus adjustment
+  var salaryAdjustment = salaryBonus(salary);
+  // maximum bonus = 13%
+  var maxBonus = 0.13;
+  // minimum bonus = 0%
+  var minBonus = 0;
+  // determine total bonus percentage
+  var bonusPercent = tenure + baseBonus + salaryAdjustment;
+  // confirm bonus percentage is within minBonus-maxBonus range
   // if not, set bonusPercent = min/max
   if (bonusPercent > maxBonus) {
     bonusPercent = maxBonus;
@@ -102,6 +100,10 @@ function bonusCalc (employeeNum, salary, rating){
   return bonusPercent;
 } // end of bonusCalc() function
 
+// function to calculate the portion of an employee's bonus
+// based on their annual review rating
+// inputs: rating (number)
+// outputs: bonus percent (number)
 function ratingBonus(rating) {
   // start with a bonus percentage of 0
   var bonusPercent = 0;
@@ -114,22 +116,50 @@ function ratingBonus(rating) {
       bonusPercent = 0;
       break;
     case 3: // rating = 3
-      bonusPercent += 0.04; // bonus of 4%
+      bonusPercent = 0.04; // bonus of 4%
       break;
     case 4: // rating = 4
-      bonusPercent += 0.06; // bonus of 6%
+      bonusPercent = 0.06; // bonus of 6%
       break;
     case 5: // rating = 5
-      bonusPercent += 0.10; // bonus of 10%
+      bonusPercent = 0.10; // bonus of 10%
       break;
     }
     // return bonus percentage
   return bonusPercent;
 }
 
-function tenureBonus() {
-
+// function to calculate the portion of an employee's bonus
+// based on their salary
+// inputs: annual salary (string)
+// outputs: bonus percentage (number)
+function salaryBonus(salary) {
+  var bonusPercent = 0;
+  // reduction in bonus for employees with salary > 65000
+  if (parseInt(salary) > 65000) {
+    bonusPercent = -0.01; // reduce bonus by 1%
+  }
+  // return salary bonus adjustment
+  return bonusPercent;
 }
+
+// function to calculate portion of an employee's bonus
+// based on how long they've been with the company
+// inputs: employee number (string)
+// outputs: bonus percentage (number)
+function tenureBonus(employeeNumber) {
+  // start with bonus percentage of 0
+  var bonusPercent = 0;
+  // additional bonus for employees with 15+ years of service
+  // 4 digit employeeNum denotes these employees
+  if (employeeNumber.length === 4) {
+    bonusPercent = 0.05; // additional bonus of 5%
+  }
+  // return bonus percentage
+  return bonusPercent;
+}
+
+
 /* TEST CASES for bonusCalc()
 console.log(bonusCalc('1234', '30000', 2));
 console.log(bonusCalc('3454', '7000', 3));
