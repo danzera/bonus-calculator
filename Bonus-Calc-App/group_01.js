@@ -78,22 +78,10 @@ function employeeOutput(employee) {
 // output: bonus percentage (decimal number)
 function bonusCalc (employeeNum, salary, rating){
   // start with bonusPercent = 0
-  var bonusPercent = 0;
+  var ratingBonus = ratingBonus(rating);
   var maxBonus = 0.13; // maximum bonus = 13%
   var minBonus = 0; // minimum bonus = 0%
-
-  // increase bonus based on employee rating -- no default case needed
-  switch (rating) {
-    case 3: // rating = 3
-      bonusPercent += 0.04; // bonus of 4%
-      break;
-    case 4: // rating = 4
-      bonusPercent += 0.06; // bonus of 6%
-      break;
-    case 5: // rating = 5
-      bonusPercent += 0.10; // bonus of 10%
-      break;
-    }
+  var bonusPercent = 0;
   // additional bonus for employees with 15+ years of service
   // 4 digit employeeNum denotes these employees
   if (employeeNum.length === 4) {
@@ -114,6 +102,34 @@ function bonusCalc (employeeNum, salary, rating){
   return bonusPercent;
 } // end of bonusCalc() function
 
+function ratingBonus(rating) {
+  // start with a bonus percentage of 0
+  var bonusPercent = 0;
+  // increase bonus based on employee rating
+  switch (rating) {
+    case 1: // rating = 1
+      bonusPercent = 0;
+      break;
+    case 2:
+      bonusPercent = 0;
+      break;
+    case 3: // rating = 3
+      bonusPercent += 0.04; // bonus of 4%
+      break;
+    case 4: // rating = 4
+      bonusPercent += 0.06; // bonus of 6%
+      break;
+    case 5: // rating = 5
+      bonusPercent += 0.10; // bonus of 10%
+      break;
+    }
+    // return bonus percentage
+  return bonusPercent;
+}
+
+function tenureBonus() {
+
+}
 /* TEST CASES for bonusCalc()
 console.log(bonusCalc('1234', '30000', 2));
 console.log(bonusCalc('3454', '7000', 3));
