@@ -23,10 +23,7 @@ The first index should also contain the employee's name.
 The second index should contain the bonus percentage the employee is to receive. See section below for calculation instructions.
 The third index should be the adjusted annual compensation (base annual + bonus)
 The fourth index should be the employee's total bonus rounded to the nearest dollar.
-Finally, iterate over the employees array and
-
-use each employee array as input to your first function
-console.log the results of each iteration.
+Finally, iterate over the employees array anduse each employee array as input to your first function console.log the results of each iteration.
 
 ### Individual Bonus calculation
 
